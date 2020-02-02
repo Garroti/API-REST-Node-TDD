@@ -1,7 +1,9 @@
 const bodyParser = require('body-parser')
+const knexLogger = require('knex-logger')
 
 module.exports = (app) => {
     app.use(bodyParser.json())
     app.use(bodyParser.urlencoded({ extended: true }))
+    app.use(knexLogger(app.db))
 }
 
