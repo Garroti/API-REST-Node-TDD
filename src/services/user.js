@@ -6,7 +6,7 @@ module.exports = (app) => {
         return app.db('users').select(['id', 'name', 'mail'])
     }
 
-    const find = (filter = {}) => {
+    const find = (filter) => {
         return app.db('users').where(filter).first()
     }
 

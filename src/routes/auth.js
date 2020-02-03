@@ -1,10 +1,13 @@
+const express = require('express')
 const jwt = require('jwt-simple')
 const bcrypt = require('bcrypt-nodejs')
 const variables = require('../config/variables')
 const ValidationError = require('../errors/ValidationError')
 
 module.exports = (app) => {
-    const signin = (req, res, next) => {
+    const router = express.Router()
+
+    router.post('/signin', (req, res, next) => {
         app.services.user.find({mail:req.body.mail})
             .then((user) => {
                 if(!user) throw new ValidationError('Usuario ou senha invalida')
@@ -19,7 +22,16 @@ module.exports = (app) => {
                 } else throw new ValidationError('Usuario ou senha invalida')
             })
             .catch(err => next(err))
-    }
+    })
 
-    return { signin }
+    router.post('/signup', async (req, res, next) => {
+        try {
+            const result = await app.services.user.save(req.body)
+            res.status(201).json(result[0])
+        } catch (err) {        
+            next(err)
+        }
+    })
+
+    return router
 }

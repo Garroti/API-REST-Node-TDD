@@ -3,7 +3,7 @@ const app = require('../../src/app')
 const jwt = require('jwt-simple')
 const variables = require('../../src/config/variables')
 
-const MAIN_ROUTE = '/accounts'
+const MAIN_ROUTE = '/api/accounts'
 let user
 
 beforeAll( async () => {
