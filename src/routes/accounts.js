@@ -1,19 +1,28 @@
 const express = require('express')
+const resourceError = require('../errors/ResourceError')
 
 module.exports = (app) => {
     const router = express.Router()
 
+    router.param('id', (req, res, next) => {
+        app.services.account.find({id: req.params.id})
+            .then((acc) => {
+                if(acc.user_id !== req.user.id) throw new resourceError()
+                else next()
+            })
+            .catch(err => next(err))
+    })
+
     router.post('/', (req, res, next) => {
-        app.services.account.save(req.body)
+        app.services.account.save({...req.body, user_id: req.user.id})
             .then((result) => {
-                if(result.error) return res.status(400).json(result)
                 return res.status(201).json(result[0])
             })
             .catch(err => next(err))
     })
 
     router.get('/', (req, res, next) => {
-        app.services.account.findAll()
+        app.services.account.findAll({user_id: req.user.id})
             .then(result => res.status(200).json(result))
             .catch(err => next(err))
     })
@@ -35,7 +44,6 @@ module.exports = (app) => {
             .then(() => res.status(204).send())
             .catch(err => next(err))
     })
-
 
     return router
 }
