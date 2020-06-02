@@ -7,7 +7,7 @@ module.exports = (app) => {
 
     protectedRouter.use('/users', app.routes.users)
     protectedRouter.use('/accounts', app.routes.accounts)
-   // protectedRouter.use('/transactions', app.routes.accounts)
+    protectedRouter.use('/transactions', app.routes.transactions)
 
     app.use('/api', app.config.passport.authenticate(), protectedRouter)
 }
