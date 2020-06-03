@@ -40,7 +40,7 @@ module.exports = (app) => {
     })
 
     router.delete('/:id', (req, res, next) => {
-        app.services.account.remove({id: req.params.id})
+        app.services.account.remove(req.params.id)
             .then(() => res.status(204).send())
             .catch(err => next(err))
     })

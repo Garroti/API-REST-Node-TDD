@@ -26,8 +26,8 @@ module.exports = (app) => {
             .insert(transaction, '*')
     }
 
-    const findById = (id) => {
-        return app.db('transactions').where(id).first()
+    const findById = (filter) => {
+        return app.db('transactions').where(filter).first()
     }
 
     const update = (id, transaction) => {

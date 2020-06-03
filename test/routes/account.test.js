@@ -7,13 +7,18 @@ const MAIN_ROUTE = '/api/accounts'
 let user
 let user2
 
-beforeEach( async () => {
+beforeAll( async () => {
     const res = await app.services.user.save({ name: 'User Account', mail: `${Date.now()}@mail.com`, password: '123456' })
     user = { ...res[0] }
     user.token = jwt.encode(user, variables.Security.secretKey)
 
     const res2 = await app.services.user.save({ name: 'User Account 2', mail: `${Date.now()}@mail.com`, password: '123456' })
     user2 = { ...res2[0] }
+})
+
+beforeEach(async() => {
+    await app.db('transactions').del()
+    await app.db('accounts').del()
 })
 
 test('Deve listar apenas as contas do usuario', () => {

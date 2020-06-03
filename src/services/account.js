@@ -14,16 +14,19 @@ module.exports = (app) => {
         return app.db('accounts').where(user_id)
     }
 
-    const find = (id = {}) => {
-        return app.db('accounts').where(id).first()
+    const find = (filter = {}) => {
+        return app.db('accounts').where(filter).first()
     }
 
     const update = (id, account) => {
         return app.db('accounts').where(id).update(account, '*')
     }
 
-    const remove = (id) => {
-        return app.db('accounts').where(id).del()
+    const remove = async (id) => {
+        const transaction = await app.services.transaction.findById({ acc_id: id })
+        if(transaction) throw new ValidationError('Essa conta possui transações associadas')
+
+        return app.db('accounts').where({ id }).del()
     }
 
     return { save, findAll, find, update, remove }
