@@ -18,6 +18,7 @@ beforeAll( async () => {
 
 beforeEach(async() => {
     await app.db('transactions').del()
+    await app.db('transfers').del()
     await app.db('accounts').del()
 })
 
