@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon src/server.js",
     "test": "jest",
-    "secure-mode": "jest --watch --verbose=true",
+    "secure-mode": "jest --watch --verbose=false",
     "knex": "node_modules/.bin/knex"
   },
   "keywords": [],
