@@ -6,6 +6,6 @@ module.exports = (app) => {
     app.use(bodyParser.json())
     app.use(bodyParser.urlencoded({ extended: true }))
     app.use(cors())
-    app.use(knexLogger(app.db))
+    // app.use(knexLogger(app.db))
 }
 
