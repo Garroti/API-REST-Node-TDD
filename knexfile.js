@@ -3,9 +3,9 @@ module.exports = {
         client: 'pg',
         version: '10.11',
         connection: {
-            host: 'localhost',
+            host: 'db',
             user: 'postgres',
-            password: '123456',
+            password: 'postgres',
             database: 'barriga'
         },
         migrations: {
