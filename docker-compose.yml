@@ -1,13 +1,6 @@
 version: "3"
 
 services:
-  app:
-    build: .
-    command: npm start
-    ports: 
-      - "3001:3001"
-    volumes:
-      - .:/usr/app
   db:
     image: postgres
     environment:
@@ -18,3 +11,10 @@ services:
       - ./pgdata:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+  app:
+    build: .
+    command: npm start
+    ports: 
+      - "3001:3001"
+    volumes:
+      - .:/usr/app
