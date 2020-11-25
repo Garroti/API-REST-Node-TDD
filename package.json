@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/server.js",
+    "prod": "NODE_ENV=prod nodemon src/server.js",
+    "start": "NODE_ENV=test nodemon src/server.js",
     "test": "jest --coverage",
-    "secure-mode": "jest --watch --verbose=true",
+    "secure-mode": "NODE_ENV=test jest --watch --verbose=true",
     "knex": "node_modules/.bin/knex"
   },
   "keywords": [],

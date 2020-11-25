@@ -14,5 +14,18 @@ module.exports = {
         seeds: {
             directory: 'src/seeds'
         }
-    }
+    },
+    prod: {
+      client: 'pg',
+      version: '13',
+      connection: {
+          host: 'localhost',
+          user: 'postgres',
+          password: 'postgres',
+          database: 'barriga_prod'
+      },
+      migrations: {
+          directory: 'src/migrations'
+      }
+  }
 }
